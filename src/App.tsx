@@ -1,26 +1,33 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from "react-redux";
+import  { startAction } from "./actions/startAction";
+import { stopAction } from "./actions/stopAction";
+import SidebarLeft from './pages/menu';
 
-function App() {
-  return (
+
+function App (props:any) {
+
+   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SidebarLeft/>
+      <div className="container-init"> 
+        <h2>Olá</h2>
+     <p> O que você precisa hoje?</p>
+        </div>
     </div>
   );
 }
 
-export default App;
+
+const mapStateToProps = (state:any) => ({
+  ...state
+});
+
+const mapDispatchToProps = (dispatch:any) => ({
+  startAction: () => dispatch(startAction),
+  stopAction: () => dispatch(stopAction)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
